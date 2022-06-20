@@ -1,0 +1,18 @@
+body {
+  background-color: var(--main);
+  font-size: 1rem;
+}
+
+a {
+  color: var(--text-primary);
+}
+
+input,
+select {
+  background-color: transparent;
+}
+
+input::placeholder,
+select:invalid {
+  color: #999;
+}

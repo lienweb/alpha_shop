@@ -77,11 +77,14 @@ function displayCart() {
 }
 
 function updateSum(cart, shippingFee, sum) {
+  const displayFee = document.querySelector(`.cart__shipping-fee`)
+
   cart.forEach((item) => {
     sum += item.subtotal
   })
   sum += shippingFee
   total.innerHTML = `$${sum}`
+  displayFee.innerHTML = (!fee ? '免費' : `$${fee}`)
 }
 
 formPanel.addEventListener('click', (e) => {

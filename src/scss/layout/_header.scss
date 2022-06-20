@@ -1,0 +1,42 @@
+header {
+  position: relative;
+}
+
+.logo--container {
+  padding: $spacer;
+
+  & .logo--wrap {
+    width: 136px;
+    height: 24px;
+    // margin-right: 0.5rem;
+
+    // &~h1 {
+    //   font-size: 24px;
+    // }
+  }
+}
+
+.header__toggle {
+  background-image: var(--hamburger);
+  position: absolute;
+  left: $spacer;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 375px) {
+  header {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    margin: 0 1rem;
+  }
+
+  //disable mobile menu
+  .header__toggle {
+    display: none;
+  }
+
+  .logo--container {
+    grid-column: 6/9;
+    z-index: 1;
+  }
+}

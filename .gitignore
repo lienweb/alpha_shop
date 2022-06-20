@@ -1,4 +1,5 @@
 *.txt
 *.log
+*copy*
 node_modules/*
 .DS_Store
