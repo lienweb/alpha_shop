@@ -3,101 +3,90 @@
   margin-top: 1.5rem;
 
   & label {
-    font-weight: 700;
-  }
-
-  & label {
+    @extend %label-style;
     display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text-secondary);
   }
 
-  & input:not([type="radio"]),
-  & select {
-    width: 100%;
-    padding: 1rem;
-    border: 1px solid #4A4A4A;
-    border-radius: 4px;
-    color: var(--text-primary);
-    font-size: 0.75rem;
-  }
+  & input:not([type="radio"]) {
+    @extend %input-style;
 
-
-
-  &.d-flex:last-child .form__col {
-    flex-basis: 45%;
-  }
-
-  & .form__col:not(.col-half) {
-    &:nth-child(even) {
-      margin-top: 1rem;
-    }
-
-    select {
-      -webkit-appearance: none;
-      cursor: pointer;
-    }
-
-    .select-wrap {
-      position: relative;
-      z-index: 0;
-
-      // & select {
-      //   background-color: transparent;
-      // }
-
-      & select::after {
-        //triangle
-        content: "";
-        border-style: solid;
-        border-width: 5px 5px 0 5px;
-        border-color: var(--text-primary) transparent transparent transparent;
-        position: absolute;
-        top: 50%;
-        right: 8px;
-        transform: translateY(-50%);
-        z-index: -1;
-      }
+    &::placeholder {
+      color: #999;
     }
   }
 }
 
-.form__part:nth-child(2) {
 
-  & p,
-  & span {
-    font-size: 12px;
+[type="radio"] {
+  -webkit-appearance: none;
+  padding: 0.5rem;
+  border: 1px solid var(--radio-border);
+  border-radius: 50%;
+  background-color: var(--radio-bg);
+  cursor: pointer;
+  box-shadow: inset 0 0 0 var(--box-shadow-size) var(--radio-box-shadow); //用光暈整個覆蓋
+
+  &:checked {
+    box-shadow: inset 0 0 0 5px var(--radio-box-shadow);
+  }
+}
+
+[type="submit"] {
+  border: unset;
+}
+
+select {
+  @extend %input-style;
+  -webkit-appearance: none;
+  cursor: pointer;
+
+  &:invalid {
+    color: #999;
+  }
+}
+
+.select-wrap {
+  position: relative;
+  z-index: 0;
+
+  &::after {
+    //triangle
+    content: "";
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: var(--text-primary) transparent transparent transparent;
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    transform: translateY(-50%);
+    z-index: -1;
+  }
+}
+
+.payment .form__col {
+  flex-basis: 45%;
+}
+
+.shipping {
+  align-items: center;
+  border: 1px solid var(--radio-border);
+  border-radius: 4px;
+
+  &.checked {
+    border-color: var(--text-primary);
   }
 
-  & label {
-    font-size: 14px;
-  }
-
-  & .form__row,
   & .form__col {
     align-items: center;
   }
 
-  & .form__row {
-    border: 1px solid $border-white;
-    border-radius: 4px;
+  & label {
+    font-size: 14px;
+    color: var(--text-primary);
+  }
 
-    & [type="radio"] {
-      -webkit-appearance: none;
-      padding: 0.5rem;
-      border: 1px solid #222;
-      border-radius: 50%;
-      cursor: pointer;
-
-      &:checked {
-        box-shadow: inset 0 0 0 5px var(--text-primary);
-      }
-    }
-
-    &.checked {
-      //js
-      border-color: var(--text-primary);
-    }
+  & p {
+    color: var(--label-text-secondary);
   }
 }
 

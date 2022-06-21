@@ -1,29 +1,6 @@
 import './scss/main.scss'
-// 運送方式擇一
 
 'use strict'
-//data source
-const shopItems = [
-  {
-    id: 1,
-    name: '破壞補丁修身牛仔褲',
-    price: 3999,
-    qty: 1,
-    stock: 10,
-    image: "../src/images/cart_item1.png",
-    subtotal: 3999,
-  },
-  {
-    id: 2,
-    name: '刷色直筒牛仔褲',
-    price: 1299,
-    qty: 1,
-    stock: 10,
-    image: "../src/images/cart_item2.png",
-    subtotal: 1299,
-  }
-]
-
 const cart = [
   {
     id: 1,
@@ -45,12 +22,12 @@ const cart = [
   }
 ]
 
+const stepperPanel = document.querySelector(`.main__stepper-container`)
 const formPanel = document.querySelector(`.main__form-control`)
 const cartPanel = document.querySelector('.cart-list')
 const total = document.querySelector('.cart__amount')
 const btnPanel = document.querySelector('.main__btn-control')
 const darkMode = document.querySelector('.nav__item-wrap .item-wrap__item:last-child')
-let step = 1
 let fee = 0
 let sum = 0
 
@@ -87,6 +64,9 @@ function updateSum(cart, shippingFee, sum) {
   displayFee.innerHTML = (!fee ? '免費' : `$${fee}`)
 }
 
+
+
+
 formPanel.addEventListener('click', (e) => {
   if (!e.target.matches('[name="shipping-method"]')) return
   const shipping = e.target.parentElement.nextElementSibling.innerText
@@ -94,6 +74,11 @@ formPanel.addEventListener('click', (e) => {
   shipping === '免費' ? fee = 0 : fee = parseInt(`${shipping.substring(1)}`)
 
   updateSum(cart, fee, sum)
+
+  //UI
+  document.querySelector('.shipping.checked').classList.toggle('checked')
+  console.log(e.target.parentElement.parentElement);
+  e.target.parentElement.parentElement.classList.toggle('checked')
 })
 
 cartPanel.addEventListener('click', (e) => {
@@ -126,66 +111,73 @@ btnPanel.addEventListener('click', (e) => {
   const previous = document.querySelector(`.btn.previous`)
   const next = document.querySelector(`.btn.next`)
   const btnSubmit = document.querySelector(`.btn.submit`)
+  const steppers = document.querySelectorAll('.stepper__step-circle')
+  const connectLines = document.querySelectorAll('.stepper__step-line')
+  const stepLabels = document.querySelectorAll('.stepper__step-label')
+  const formPages = document.querySelectorAll('.form__part')
 
-  //check current page
-  let n = step
-  //get next page index
-  if (e.target.matches('.previous')) {
-    document.querySelector(`.stepper__step:nth-child(${n - 1}) .stepper__step-circle`).classList.toggle('checked')
-    document.querySelector(`.stepper__step:nth-child(${n}) .stepper__step-circle`).classList.toggle('active')
-    document.querySelector(`.stepper__step:nth-child(${n}) .stepper__step-line`).classList.toggle('active')
-    step--
-    if (step < 1) step = 1
+  let step = parseInt(stepperPanel.dataset.step)
+  let nextStep = 2
+
+  function resetStyle() {
+    //stepper
+    steppers[0].classList.remove('checked')
+    steppers[1].classList.remove('checked', 'active')
+    steppers[2].classList.remove('checked', 'active')
+    connectLines[1].classList.remove('active')
+    stepLabels[1].classList.remove('active')
+    stepLabels[2].classList.remove('active')
+    //forms
+    formPages[0].classList.add('d-none')
+    formPages[1].classList.add('d-none')
+    formPages[2].classList.add('d-none')
+    //buttons
+    previous.classList.add('d-none')
+    previous.style.visibility = 'hidden'
+    next.classList.add('d-none')
+    btnSubmit.classList.add('d-none')
+  }
+
+  if (e.target.matches('.next')) {
+    if (step === 1) {
+      nextStep = 2
+    } else if (step === 2) {
+      nextStep = 3
+    }
+  } else if (e.target.matches('.previous')) {
+    if (step === 2) {
+      nextStep = 1
+    } else if (step === 3) {
+      nextStep = 2
+    }
+  }
+  stepperPanel.dataset.step = nextStep
+
+  if (nextStep === 1) {
+    resetStyle()
+    formPages[0].classList.remove('d-none')
+    next.classList.remove('d-none')
+  } else if (nextStep === 2) {
+    resetStyle()
+    steppers[0].classList.add('checked')
+    steppers[1].classList.add('active')
+    stepLabels[1].classList.add('active')
+    formPages[1].classList.remove('d-none')
+    previous.classList.remove('d-none')
+    previous.style.visibility = 'visible'
+    next.classList.remove('d-none')
   } else {
-    document.querySelector(`.stepper__step:nth-child(${n}) .stepper__step-circle`).classList.toggle('checked')
-    document.querySelector(`.stepper__step:nth-child(${n + 1}) .stepper__step-circle`).classList.toggle('active')
-    document.querySelector(`.stepper__step:nth-child(${n + 1}) .stepper__step-line`).classList.toggle('active')
-    step++
-    if (step > 3) step = 3
+    resetStyle()
+    steppers[0].classList.add('checked')
+    steppers[1].classList.add('checked')
+    steppers[2].classList.add('active')
+    stepLabels[1].classList.add('active')
+    stepLabels[2].classList.add('active')
+    connectLines[1].classList.add('active')
+    formPages[2].classList.remove('d-none')
+    previous.style.visibility = 'visible'
+    btnSubmit.classList.remove('d-none')
   }
-
-  console.log(`next page[${step}]`);
-
-  switch (step) {
-    case 1:
-      if (!previous.matches('.d-none')) {
-        previous.classList.add('d-none')
-      }
-      if (next.matches('.d-none')) {
-        next.classList.remove('d-none')
-      }
-      if (!btnSubmit.matches('.d-none')) {
-        btnSubmit.classList.add('d-none')
-      }
-      break;
-    case 2:
-      if (previous.matches('.d-none')) {
-        console.log('remove previous none at p2');
-        previous.classList.remove('d-none')
-      }
-      if (next.matches('.d-none')) {
-        next.classList.remove('d-none')
-      }
-      if (!btnSubmit.matches('.d-none')) {
-        btnSubmit.classList.add('d-none')
-      }
-      break;
-    case 3:
-      if (previous.matches('.d-none')) {
-        previous.classList.remove('d-none')
-      }
-      if (!next.matches('.d-none')) {
-        next.classList.add('d-none')
-      }
-      if (btnSubmit.matches('.d-none')) {
-        btnSubmit.classList.remove('d-none')
-      }
-      break;
-    default:
-      break;
-  }
-  document.querySelectorAll('.form__part').forEach(element => { element.classList.add('d-none') })
-  document.querySelector(`.form__part:nth-child(${step})`).classList.toggle('d-none')
 })
 
 darkMode.addEventListener('click', (e) => {
@@ -201,5 +193,3 @@ darkMode.addEventListener('click', (e) => {
     iconImg.src = darkModeIcon
   }
 })
-
-displayCart()

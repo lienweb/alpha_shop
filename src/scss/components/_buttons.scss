@@ -4,16 +4,16 @@
   margin-top: 82px;
 
   .btn {
-    flex: 1;
     padding: 14.5px;
     text-align: center;
 
     &:hover {
       cursor: pointer;
+      opacity: 0.8;
     }
 
     &.active {
-      background-color: #F67599;
+      background-color: var(--btn-active);
       border-radius: 8px;
       color: #fff;
     }
@@ -21,6 +21,14 @@
     &.disabled {
       cursor: auto;
     }
+  }
+
+  .previous {
+    color: var(--text-primary);
+  }
+
+  .next {
+    flex: 1;
   }
 
   &::before {
@@ -36,15 +44,15 @@
 @media screen and (min-width: 375px) {
   .main__btn-control {
     grid-column: 1/7;
+    margin-bottom: 120px;
 
-    .btn:not(.d-none) {
+    .previous {
       display: block;
-      flex: 0 1 auto;
-      margin: 2rem 0 120px 0;
+      visibility: hidden;
+    }
 
-      &:not(.d-none):nth-child(2) {
-        width: 30%;
-      }
+    .next {
+      flex: 0 1 auto;
     }
   }
 }

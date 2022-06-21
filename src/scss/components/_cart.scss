@@ -7,7 +7,7 @@
 
 
 .main__cart-control {
-  border: 1px solid $border-white;
+  border: 1px solid var(--cart-border);
   border-radius: 8px;
   background-color: var(--cart-bg);
 }
@@ -40,7 +40,7 @@
 .cart-list::after,
 .cart__shipping-wrap::after {
   content: "";
-  border: 1px solid $border-white;
+  border-bottom: 1px solid var(--cart-border);
   position: absolute;
   bottom: -10px;
   left: 0;
@@ -52,10 +52,14 @@
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background-color: #f0f0f5;
+  background-color: var(--cart-count-bg);
   line-height: 26px;
   text-align: center;
   cursor: pointer;
+
+  &:hover {
+    @extend %standard-box-shadow;
+  }
 
   ~.cart-item__item-count {
     font-weight: 500;
