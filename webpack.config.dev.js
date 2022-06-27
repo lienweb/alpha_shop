@@ -41,15 +41,25 @@ module.exports = {
           filename: 'images/[hash][ext][query]'
         },
       },
+      {
+        test: /\.html$/i,
+        // loader: "html-loader",
+        // options: {},
+        type: 'asset/resource',
+        generator: {
+          filename: 'index.html'
+        },
+      },
     ],
   },
   plugins: [new MiniCssExtractPlugin(),
-  new HtmlWebpackPlugin(
-    {
-      template: 'src/template.html',
-      favicon: 'src/images/logo.svg'
-    }
-  ),],
+    // new HtmlWebpackPlugin(
+    //   {
+    //     template: 'src/template.html',
+    //     favicon: 'src/images/logo.svg'
+    //   }
+    // ),
+  ],
   // add this if have > 1 entry point 
   // optimization: {
   //   runtimeChunk: 'single',
