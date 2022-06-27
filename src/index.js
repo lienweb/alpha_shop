@@ -1,4 +1,7 @@
 import './scss/main.scss'
+import darkModeIcon from "../src/images/dark_mode.svg"
+import lightModeIcon from "../src/images/bright_mode.svg"
+
 
 'use strict'
 const cart = [
@@ -181,24 +184,22 @@ btnPanel.addEventListener('click', (e) => {
 })
 
 darkMode.addEventListener('click', (e) => {
-  const darkModeIcon = "../src/images/dark_mode.svg"
-  const lightModeIcon = "../src/images/bright_mode.svg"
   const iconImg = e.target
 
-  //
-  let darkMode = JSON.stringify(localStorage.getItem('theme')) || 'light'
+  let darkMode = JSON.parse(localStorage.getItem('theme')) || 'light'
 
-  console.log(darkMode);
+  console.log(`1-[${darkMode}]`);
 
   if (darkMode === 'light') {
     darkMode = 'dark'
     document.body.setAttribute("data-theme", darkMode)
     iconImg.src = lightModeIcon
-    localStorage.setItem('theme', JSON.parse(darkMode))
+    localStorage.setItem('theme', JSON.stringify(darkMode))
   } else {
     darkMode = 'light'
     document.body.setAttribute("data-theme", darkMode)
     iconImg.src = darkModeIcon
-    localStorage.setItem('theme', JSON.parse(darkMode))
+    localStorage.setItem('theme', JSON.stringify(darkMode))
   }
+  console.log(`2-[${darkMode}]`);
 })
