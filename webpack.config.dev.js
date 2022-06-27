@@ -1,13 +1,25 @@
 const path = require('path');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  mode: 'development',
   entry: './src/index.js',
+  devtool: 'inline-source-map',
+  devServer: {
+    static: {
+      directory: path.join(__dirname, './dist')
+    },
+    hot: true,
+  },
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
     //export images to specific dir
-    assetModuleFilename: 'images/[hash][ext][query]'
+    assetModuleFilename: 'images/[hash][ext][query]',
+    //clean up dist/ before each build
+    clean: true,
+    //for 
   },
   module: {
     rules: [
@@ -31,5 +43,15 @@ module.exports = {
       },
     ],
   },
-  plugins: [new MiniCssExtractPlugin()]
+  plugins: [new MiniCssExtractPlugin(),
+  new HtmlWebpackPlugin(
+    {
+      template: 'src/template.html',
+      favicon: 'src/images/logo.svg'
+    }
+  ),],
+  // add this if have > 1 entry point 
+  // optimization: {
+  //   runtimeChunk: 'single',
+  // },
 };

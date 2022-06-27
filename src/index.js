@@ -185,11 +185,20 @@ darkMode.addEventListener('click', (e) => {
   const lightModeIcon = "../src/images/bright_mode.svg"
   const iconImg = e.target
 
-  if (document.body.dataset.dark === 'false') {
-    document.body.setAttribute("data-dark", "true")
+  //
+  let darkMode = JSON.stringify(localStorage.getItem('theme')) || 'light'
+
+  console.log(darkMode);
+
+  if (darkMode === 'light') {
+    darkMode = 'dark'
+    document.body.setAttribute("data-theme", darkMode)
     iconImg.src = lightModeIcon
+    localStorage.setItem('theme', JSON.parse(darkMode))
   } else {
-    document.body.setAttribute("data-dark", "false")
+    darkMode = 'light'
+    document.body.setAttribute("data-theme", darkMode)
     iconImg.src = darkModeIcon
+    localStorage.setItem('theme', JSON.parse(darkMode))
   }
 })
