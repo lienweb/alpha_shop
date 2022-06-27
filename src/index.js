@@ -2,6 +2,7 @@ import './scss/main.scss'
 import "./template.html"
 import darkModeIcon from "./images/dark_mode.svg"
 import lightModeIcon from "./images/bright_mode.svg"
+import swal from 'sweetalert';
 
 
 'use strict'
@@ -32,6 +33,7 @@ const cartPanel = document.querySelector('.cart-list')
 const total = document.querySelector('.cart__amount')
 const btnPanel = document.querySelector('.main__btn-control')
 const darkMode = document.querySelector('.nav__item-wrap .item-wrap__item:last-child')
+let theme = JSON.parse(localStorage.getItem('theme')) || 'light'
 let fee = 0
 let sum = 0
 
@@ -81,7 +83,6 @@ formPanel.addEventListener('click', (e) => {
 
   //UI
   document.querySelector('.shipping.checked').classList.toggle('checked')
-  console.log(e.target.parentElement.parentElement);
   e.target.parentElement.parentElement.classList.toggle('checked')
 })
 
@@ -154,7 +155,12 @@ btnPanel.addEventListener('click', (e) => {
     } else if (step === 3) {
       nextStep = 2
     }
+  } else if (e.target.matches('.submit')) {
+    steppers[2].classList.add('checked')
+    swal("下單成功!", "返回購物車首頁...", "success");
+    nextStep = 1
   }
+
   stepperPanel.dataset.step = nextStep
 
   if (nextStep === 1) {
@@ -186,7 +192,6 @@ btnPanel.addEventListener('click', (e) => {
 
 darkMode.addEventListener('click', (e) => {
   const iconImg = e.target
-  let theme = document.body.dataset.theme
 
   if (theme === 'light') {
     theme = 'dark'
@@ -200,3 +205,5 @@ darkMode.addEventListener('click', (e) => {
     localStorage.setItem('theme', JSON.stringify(theme))
   }
 })
+
+document.body.setAttribute("data-theme", theme)

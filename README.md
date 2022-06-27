@@ -37,6 +37,7 @@
 
 主題色
 - [x] Dark Mode
+  - localStorage紀錄主題色
 
 
 

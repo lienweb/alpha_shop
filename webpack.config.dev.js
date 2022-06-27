@@ -42,23 +42,21 @@ module.exports = {
         },
       },
       {
+        //resolve img src problem
         test: /\.html$/i,
-        // loader: "html-loader",
-        // options: {},
-        type: 'asset/resource',
-        generator: {
-          filename: 'index.html'
-        },
+        loader: "html-loader",
+        options: {},
       },
     ],
   },
   plugins: [new MiniCssExtractPlugin(),
-    // new HtmlWebpackPlugin(
-    //   {
-    //     template: 'src/template.html',
-    //     favicon: 'src/images/logo.svg'
-    //   }
-    // ),
+  //hot reload html
+  new HtmlWebpackPlugin(
+    {
+      template: 'src/template.html',
+      favicon: 'src/images/logo.svg'
+    }
+  ),
   ],
   // add this if have > 1 entry point 
   // optimization: {
