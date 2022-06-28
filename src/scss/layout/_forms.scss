@@ -14,6 +14,11 @@
       color: #999;
     }
   }
+
+  & input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px var(--main) inset;
+    -webkit-text-fill-color: var(--text-primary);
+  }
 }
 
 
