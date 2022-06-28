@@ -58,6 +58,8 @@ Node.js dependent, if not installed on local environment, please follow [this gu
 npm install
 
 npm run build
+
+npm start
 ```
 - Use vs code live server extension to see the results
 
@@ -67,5 +69,6 @@ Add additional notes about how to deploy this on a live system -->
 
 ## Built With
 - [x] webpack
+- [x] webpack-dev-server
 
 <!-- ## Versioning -->

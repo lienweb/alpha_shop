@@ -91,7 +91,7 @@
               </div>
               <div class="form__col w-65  col-half">
                 <label for="">姓名</label>
-                <input type="text" placeholder="請輸入姓名" required>
+                <input type="text" placeholder="請輸入姓名" autocomplete="name" required>
               </div>
             </div>
             <!-- row end -->
@@ -99,11 +99,11 @@
               <div class="form__col">
                 <label for="phone">電話</label>
                 <input type="tel" id="phone" name="phone" pattern="[0-9]{4}-[0-9]{3}-[0-9]{3}" placeholder="請輸入行動電話"
-                  required>
+                  autocomplete="tel" required>
               </div>
               <div class="form__col mt-4">
                 <label for="">Email</label>
-                <input type="email" placeholder="請輸入Email" required>
+                <input type="email" placeholder="請輸入Email" autocomplete="email" required>
               </div>
             </div>
             <div class="form__row">
@@ -118,7 +118,7 @@
               </div>
               <div class="form__col  mt-4">
                 <label for="">地址</label>
-                <input type="text" placeholder="請輸入地址" required>
+                <input type="text" placeholder="請輸入地址" autocomplete="street-address" required>
               </div>
             </div>
           </div>
@@ -150,24 +150,24 @@
             <div class="form__row">
               <div class="form__col">
                 <label>持卡人姓名</label>
-                <input type="text" placeholder="John Doe" required>
+                <input type="text" placeholder="John Doe" autocomplete="cc-name" required>
               </div>
             </div>
             <div class="form__row d-flex payment">
               <div class="form__col">
                 <label>卡號</label>
                 <input type="text" placeholder="1111 2222 3333 4444" pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}"
-                  required>
+                  autocomplete="cc-number" required>
               </div>
               <div class="form__col col-half">
                 <label for="expire-date">有效期限</label>
-                <input type="text" placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}" required>
+                <input type="text" placeholder="MM/YY" pattern="[0-9]{2}/[0-9]{2}" autocomplete="cc-exp" required>
               </div>
             </div>
             <div class="form__row">
               <div class="form__col">
                 <label>CVV / CVC</label>
-                <input type="text" placeholder="123" pattern="[0-9]{3}" required>
+                <input type="text" placeholder="123" pattern="[0-9]{3}" autocomplete="csc" required>
               </div>
             </div>
           </div>
@@ -221,7 +221,7 @@
           <button type="button" class="btn d-none previous">&#8592; 上一步</button>
           <button type="button" class="btn active next">下一步 &#8594;
           </button>
-          <button type="submit" class="btn active submit d-none disabled">確認下單</button>
+          <button type="submit" class="btn active submit d-none">確認下單</button>
         </div>
       </div>
     </main>

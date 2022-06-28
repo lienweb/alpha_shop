@@ -54,7 +54,7 @@ module.exports = {
   new HtmlWebpackPlugin(
     {
       template: 'src/template.html',
-      favicon: 'src/images/logo.svg'
+      favicon: 'dist/logo.svg'
     }
   ),
   ],
